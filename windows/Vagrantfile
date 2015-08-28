@@ -17,7 +17,9 @@ Vagrant.configure(2) do |config|
     config.vm.define nodes["name"] do |node|
       node.vm.hostname = nodes["name"]
       node.vm.box = nodes["box"]
-      node.vm.provision :shell, path: nodes["config"]
+      node.vm.provision :shell, path: nodes["config1"]
+      node.vm.provision :shell, path: nodes["config2"]
+      node.vm.provision :shell, path: nodes["config3"]
       node.vm.network "private_network", ip: nodes["priv_ip"]
       node.vm.synced_folder ".", "/vagrant"
       node.vm.provider "virtualbox" do |v|

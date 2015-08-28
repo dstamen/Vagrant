@@ -3,5 +3,7 @@
   box: opentable/win-2012r2-standard-amd64-nocm
   mem: 2048
   cpus: 2
-  config: bootstrap_windows.bat
+  config1: bootstrap_windows_dc_install.bat
+  config2: bootstrap_windows_dc_config.bat
+  config3: bootstrap_windows_dhcp.bat
   priv_ip: 10.10.10.10
