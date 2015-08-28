@@ -1,0 +1,14 @@
+echo 'Install ADDS'
+@powershell
+Get-WindowsFeature AD-Domain-Services | Install-WindowsFeature
+Get-WindowsFeature RSAT-ADDS | Install-WindowsFeature
+
+echo 'Install ADDS Forest'
+Install-ADDSForest -DomainName "lab.local" -DomainNetbiosName "lab" -Verbose
+
+echo 'Create OUs'
+Import-Module ActiveDirectory
+New-ADOrganizationalUnit "Lab Users"
+New-ADOrganizationalUnit "Lab Groups"
+New-ADOrganizationalUnit "Lab Servers"
+New-ADOrganizationalUnit "Lab Desktops"
