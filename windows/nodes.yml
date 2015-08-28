@@ -1,0 +1,19 @@
+---
+- name: dc01
+  box: opentable/win-2012r2-standard-amd64-nocm
+  mem: 2048
+  cpus: 2
+  config: bootstrap_windows.sh
+  priv_ip: 10.10.10.10
+- name: dc02
+  box: opentable/win-2012r2-standard-amd64-nocm
+  mem: 2048
+  cpus: 2
+  config: bootstrap_windows.sh
+  priv_ip: 10.10.10.10
+- name: vc01
+  box: opentable/win-2012r2-standard-amd64-nocm
+  mem: 2048
+  cpus: 2
+  config: bootstrap_windows.sh
+  priv_ip: 10.10.10.10
