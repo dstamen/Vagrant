@@ -1,3 +1,4 @@
+echo ## wait
 timeout /t 60 /NOBREAK
 
 echo ## add permissions
