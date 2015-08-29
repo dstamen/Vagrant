@@ -22,6 +22,7 @@ Update nodes.yml to reflect your desired nodes to spin up.
 
 Spin up your environment
 ````
+````
 vagrant up
 ````
 
