@@ -10,29 +10,30 @@ Requirements
 The following packages must be installed on your Host you intend on running all of this from.
 
 VirtualBox (https://www.virtualbox.org/)
+
 Vagrant (https://www.vagrantup.com/)
+
+Need to download the Windows box from Atlas (vagrant box add opentable/win-2012r2-standard-amd64-nocm)
 
 Usage
 =====
 
 http://everythingshouldbevirtual.com/learning-vagrant-and-ansible-provisioning
 
-````
 Update nodes.yml to reflect your desired nodes to spin up.
 
 Spin up your environment
-````
-````
+========================
+
 vagrant up
-````
 
 License
--------
+=======
 
 BSD
 
 Author Information
-------------------
+==================
 
 David Stamen
 - @davidstamen
@@ -40,7 +41,8 @@ David Stamen
 - dstamen [at] gmail.com
 
 Base scripts that were customized, were provided by
----------------------------------------------------
+===================================================
+
 Larry Smith Jr.
 - @mrlesmithjr
 - http://everythingshouldbevirtual.com
