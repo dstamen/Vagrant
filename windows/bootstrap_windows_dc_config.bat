@@ -1,3 +1,10 @@
+timeout /t 60 /NOBREAK
+
+echo ## add permissions
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-ADGroupMember 'Domain Admins' Vagrant"
+@powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-ADGroupMember 'Enterprise Admins' Vagrant"
+
+echo ## create ous
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "New-ADOrganizationalUnit 'Lab Users'"
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "New-ADOrganizationalUnit 'Lab Groups'"
 @powershell -NoProfile -ExecutionPolicy Bypass -Command "New-ADOrganizationalUnit 'Lab Servers'"
