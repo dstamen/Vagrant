@@ -13,7 +13,8 @@ VirtualBox (https://www.virtualbox.org/)
 
 Vagrant (https://www.vagrantup.com/)
 
-Need to download the Windows box from Atlas (vagrant box add opentable/win-2012r2-standard-amd64-nocm)
+
+Need to download the Windows box from Atlas (vagrant box add devopsguys/Windows2012R2Eval)
 
 Usage
 =====
