@@ -2,7 +2,7 @@ Purpose
 =======
 This vagrant environment installs a windows 2012r2 server with AD/DNS/DHCP and a member server who uses the new dhcp network.
 
-This can be used as a base to stand up labs for testing.
+This can be used as a base to stand up labs for testing. Modify the nodes.yml to add additional servers.
 
 Requirements
 ============
@@ -22,6 +22,13 @@ Usage
 http://everythingshouldbevirtual.com/learning-vagrant-and-ansible-provisioning
 
 Update nodes.yml to reflect your desired nodes to spin up.
+
+Scripts
+============
+install_lab_dc.ps1 - Installs the domain controller, you can change the password and/or domain name here.
+config_lab_dc.ps1 - sets additional permissions and creates OU structure
+install_lab_dhcp.ps1 - installs DHCP, adds a scope and configures options
+join_lab_domain.ps1 - used to join additional servers to the domain
 
 Spin up your environment
 ========================
