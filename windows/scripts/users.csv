@@ -1,0 +1,2 @@
+GivenName,Surname,Name,DisplayName,SamAccountName,Path,AccountPassword
+John,Smith,John Smith,John Smith,john.smith,"OU=User Accounts,OU=Lab Users,DC=lab,DC=local",P@ssword1
