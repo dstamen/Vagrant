@@ -1,14 +1,1 @@
-echo ## wait
-timeout /t 60 /NOBREAK
-
-echo ## Install the DHCP Role
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "Install-WindowsFeature DHCP -IncludeAllSubFeature -IncludeManagementTools"
-
-echo ## Authorize the DHCP server in Active Directory
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-DhcpServerInDC -DnsName dc01.lab.local -IPAddress 10.10.10.10"
-
-echo ## Create an IPv4 DHCP scope
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "Add-DhcpServerv4Scope -Name 10.10.10.X -StartRange 10.10.10.50 -EndRange 10.10.10.250 -SubnetMask 255.255.255.0"
-
-echo ## Set the DNS server to use for all clients to use on the DHCP server
-@powershell -NoProfile -ExecutionPolicy Bypass -Command "Set-DhcpServerv4OptionValue -DnsDomain lab.local -DnsServer 10.10.10.10"
+PowerShell -NoProfile -ExecutionPolicy Bypass -file "c:\vagrant\install_lab_dhcp.ps1"

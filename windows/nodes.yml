@@ -1,6 +1,6 @@
 ---
 - name: dc01
-  box: opentable/win-2012r2-standard-amd64-nocm
+  box: devopsguys/Windows2012R2Eval
   mem: 2048
   cpus: 2
   config1: bootstrap_windows_dc_install.bat
@@ -10,10 +10,19 @@
   netdesc: lab.local
   ip: 10.10.10.10
 - name: server01
-  box: opentable/win-2012r2-standard-amd64-nocm
+  box: devopsguys/Windows2012R2Eval
   mem: 2048
   cpus: 2
-  config1: bootstrap_blank.bat
+  config1: bootstrap_windows.bat
+  config2: bootstrap_blank.bat
+  config3: bootstrap_blank.bat
+  method: dhcp
+  netdesc: lab.local
+- name: server02
+  box: devopsguys/Windows2012R2Eval
+  mem: 2048
+  cpus: 2
+  config1: bootstrap_windows.bat
   config2: bootstrap_blank.bat
   config3: bootstrap_blank.bat
   method: dhcp
