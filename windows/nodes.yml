@@ -1,6 +1,6 @@
 ---
 - name: DC01
-  box: devopsguys/Windows2012R2Eval
+  box: 2012r2v3
   mem: 2048
   cpus: 2
   config1: bootstrap_windows_dc_install.bat
@@ -10,7 +10,7 @@
   netdesc: lab.local
   ip: 10.10.10.10
 - name: DC02
-  box: devopsguys/Windows2012R2Eval
+  box: 2012r2v3
   mem: 2048
   cpus: 2
   config1: bootstrap_windows_dc_2_install.bat
@@ -20,7 +20,7 @@
   ip: 10.10.10.11
   netdesc: lab.local
 - name: VC01
-  box: devopsguys/Windows2012R2Eval
+  box: 2012r2v3
   mem: 2048
   cpus: 2
   config1: bootstrap_windows.bat
