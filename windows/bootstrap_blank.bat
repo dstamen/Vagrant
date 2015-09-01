@@ -1,1 +1,1 @@
-echo ## This file intentionally left blank ##
+timeout /t 15
