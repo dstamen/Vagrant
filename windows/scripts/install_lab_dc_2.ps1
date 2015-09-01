@@ -14,4 +14,15 @@ $credential = New-Object System.Management.Automation.PSCredential($username,$pa
 Install-WindowsFeature 'AD-Domain-Services'  -IncludeAllSubFeature -IncludeManagementTools
 
 #Installing ADDS Forest
-Install-ADDSDomainController -DomainName "lab.local" -Credential $credential -SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Force
+Install-ADDSDomainController -DomainName "lab.local" -Credential $credential -SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Force -NoRebootOnCompletion:$true
+
+#Set DNS to listen on internal network
+dnscmd /ResetListenAddresses 10.10.10.11
+
+#add dhcp rsat to configure DHCP with new dns Server
+Install-WindowsFeature RSAT-DHCP
+Set-DhcpServerv4OptionValue -computername dc01.lab.local -DnsDomain lab.local -DnsServer 10.10.10.10,10.10.10.11
+
+#Wait and reboot
+timeout /t 10
+shutdown /r /t 5
