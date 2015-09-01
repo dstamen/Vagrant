@@ -28,6 +28,7 @@ Vagrant.configure(2) do |config|
        if nodes["method"] == "dhcp"
          node.vm.network "private_network", type: "dhcp", virtualbox__intnet: nodes["netdesc"]
        end
+      config.vm.network "forwarded_port", guest: 3389, host: 13390, auto_correct: true # remote desktop
       node.vm.synced_folder ".", "/vagrant"
       node.vm.provider "virtualbox" do |v|
         v.memory = nodes["mem"]
