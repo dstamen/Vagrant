@@ -13,8 +13,7 @@ VirtualBox (https://www.virtualbox.org/)
 
 Vagrant (https://www.vagrantup.com/)
 
-
-Need to download the Windows box from Atlas (vagrant box add devopsguys/Windows2012R2Eval)
+For the box type chose your own windows flavor box. (i used devopsguys/Windows2012R2Eval and updated it to be my own.)
 
 Usage
 =====
