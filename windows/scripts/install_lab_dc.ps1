@@ -7,3 +7,6 @@ Install-WindowsFeature 'AD-Domain-Services'  -IncludeAllSubFeature -IncludeManag
 
 #Installing ADDS Forest
 Install-ADDSForest -DomainName "lab.local" -DomainNetbiosName "lab" -SafeModeAdministratorPassword (ConvertTo-SecureString "P@ssword1" -AsPlainText -Force) -Force
+
+#Set DNS to only listen on internal network
+dnscmd /ResetListenAddresses 10.10.10.10
