@@ -33,6 +33,7 @@ Vagrant.configure(2) do |config|
       node.vm.provider "virtualbox" do |v|
         v.memory = nodes["mem"]
         v.cpus = nodes["cpus"]
+        v.name = nodes["name"]
       end
     end
   end
