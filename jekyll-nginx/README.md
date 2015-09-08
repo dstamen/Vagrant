@@ -1,6 +1,6 @@
 Purpose
 =======
-This vagrant environment installs a windows 2012r2 server with AD/DNS/DHCP and a member server who uses the new dhcp network.
+This vagrant environment installs an ubuntu 14.04 server with NGINX.
 
 This can be used as a base to stand up labs for testing. Modify the nodes.yml to add additional servers.
 
@@ -13,8 +13,6 @@ VirtualBox (https://www.virtualbox.org/)
 
 Vagrant (https://www.vagrantup.com/)
 
-For the box type chose your own windows flavor box. (i used devopsguys/Windows2012R2Eval and updated it to be my own.)
-
 Usage
 =====
 
@@ -24,10 +22,7 @@ Update nodes.yml to reflect your desired nodes to spin up.
 
 Scripts
 ============
-install_lab_dc.ps1 - Installs the domain controller, you can change the password and/or domain name here.
-config_lab_dc.ps1 - sets additional permissions and creates OU structure
-install_lab_dhcp.ps1 - installs DHCP, adds a scope and configures options
-join_lab_domain.ps1 - used to join additional servers to the domain
+bootstrap_linux_nginx.sh - installs NGINX
 
 Spin up your environment
 ========================
