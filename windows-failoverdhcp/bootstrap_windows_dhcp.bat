@@ -1,1 +1,1 @@
-PowerShell -NoProfile -ExecutionPolicy Bypass -file "c:\vagrant\scripts\install_lab_dhcp.ps1"
+PowerShell -NoProfile -ExecutionPolicy Bypass -file "c:\vagrant\scripts\install_ha_dhcp.ps1"

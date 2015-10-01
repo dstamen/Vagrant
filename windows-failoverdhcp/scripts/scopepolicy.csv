@@ -1,0 +1,6 @@
+ScopeID,Server,Name,Description,Condition,Operator,MAC1,MAC2
+10.10.10.0,10.10.10.10,MAC Allow List,Only MAC's listed in this policy will be issues IP addresses,OR,EQ,08*,00*
+10.10.20.0,10.10.10.10,MAC Allow List,Only MAC's listed in this policy will be issues IP addresses,OR,EQ,08*,00*
+10.10.30.0,10.10.10.10,MAC Allow List,Only MAC's listed in this policy will be issues IP addresses,OR,EQ,08*,00*
+10.10.40.0,10.10.10.10,MAC Allow List,Only MAC's listed in this policy will be issues IP addresses,OR,EQ,08*,00*
+10.10.50.0,10.10.10.10,MAC Allow List,Only MAC's listed in this policy will be issues IP addresses,OR,EQ,08*,00*
