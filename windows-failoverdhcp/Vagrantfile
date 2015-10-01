@@ -1,0 +1,40 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Ensure yaml module is loaded
+require 'yaml'
+
+# Read yaml node definitions to create **Update nodes.yml to reflect any changes
+nodes = YAML.load_file('nodes.yml')
+
+Vagrant.configure(2) do |config|
+#for all nodes
+#  config.ssh.insert_key = false
+#  config.vm.provision :shell, path: nodes["config"]
+
+#for each node
+  nodes.each do |nodes|
+    config.vm.define nodes["name"] do |node|
+      node.vm.hostname = nodes["name"]
+      node.vm.box = nodes["box"]
+      node.vm.provision :shell, inline: "PowerShell -NoProfile -ExecutionPolicy Bypass -Command 'Get-NetIPConfiguration -InterfaceIndex 12|Set-DnsClient -RegisterThisConnectionsAddress:$false'"
+      node.vm.provision :shell, inline: "tzutil.exe /s 'Eastern Standard Time'"
+      node.vm.provision :shell, path: nodes["config1"]
+      node.vm.provision :shell, path: nodes["config2"]
+      if nodes["method"] == "static"
+         node.vm.network "private_network", ip: nodes["ip"], virtualbox__intnet: nodes["netdesc"]
+       end
+       if nodes["method"] == "dhcp"
+         node.vm.network "private_network", type: "dhcp", virtualbox__intnet: nodes["netdesc"]
+       end
+      config.vm.network "forwarded_port", guest: 3389, host: 13390, auto_correct: true # remote desktop
+      node.vm.synced_folder ".", "/vagrant"
+      node.vm.provider "virtualbox" do |v|
+        v.memory = nodes["mem"]
+        v.cpus = nodes["cpus"]
+        v.name = nodes["name"]
+        v.gui = nodes["gui"]
+      end
+    end
+  end
+end
