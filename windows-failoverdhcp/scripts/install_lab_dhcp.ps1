@@ -50,6 +50,9 @@ Add-DhcpServerv4Reservation -ComputerName $server1 -ScopeId 10.10.10.0 -IPAddres
 Add-DhcpServerv4Reservation -ComputerName $server1 -ScopeId 10.10.10.0 -IPAddress (Get-DhcpServerv4FreeIPAddress -ComputerName $server1 -ScopeId 10.10.10.0) -ClientId 00-00-00-00-00-09 -Name "Node09"
 Add-DhcpServerv4Reservation -ComputerName $server1 -ScopeId 10.10.10.0 -IPAddress (Get-DhcpServerv4FreeIPAddress -ComputerName $server1 -ScopeId 10.10.10.0) -ClientId 00-00-00-00-00-10 -Name "Node10"
 
+#Convert Leases to Reservation
+#Get-DhcpServerv4Lease -ComputerName $server1 -ScopeID 10.10.10.0 | Add-DhcpServerv4Reservation -ComputerName $server1
+
 #Replicate Settings
 Write-Host "Forcing Replication" -ForegroundColor "Yellow"
 Invoke-DhcpServerv4FailoverReplication -ComputerName $server1 -ScopeID 10.10.10.0 -Force
