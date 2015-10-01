@@ -24,7 +24,7 @@ Update nodes.yml to reflect your desired nodes to spin up.
 
 Scripts
 ============
-install_lab_dhcp.ps1 - Installs and configures HA-DHCP
+install_ha_dhcp.ps1 - Installs and configures HA-DHCP
 
 Spin up your environment
 ========================
