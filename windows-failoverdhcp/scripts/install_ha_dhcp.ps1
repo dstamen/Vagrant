@@ -1,6 +1,7 @@
 # Powershell Script for Vagrant to install and configure DHCP
 # @davidstamen
 # http://davidstamen.com
+cd c:\vagrant\scripts
 
 $username = "vagrant"
 $password = "vagrant"
