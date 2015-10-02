@@ -14,12 +14,15 @@ $cred = new-object -typename System.Management.Automation.PSCredential -argument
 Write-Host "Installing DHCP Server Role" -ForegroundColor "Red"
 $csv = Import-CSV .\dhcpservers.csv
 foreach ($server in $csv) {
-  Install-WindowsFeature DHCP -IncludeAllSubFeature -IncludeManagementTools -Computer $server.Name -Credential $cred -Verbose
+  Install-WindowsFeature DHCP -IncludeAllSubFeature -IncludeManagementTools -Computer $server.IP -Credential $cred -Verbose
 }
 
 # Authorize the DHCP server in Active Directory
-#$server = hostname
-#Add-DhcpServerInDC -DnsName $server -IPAddress $server1
+#Write-Host "Adding DHCP Server to AD" -ForegroundColor "Red"
+#$csv = Import-CSV .\dhcpservers.csv
+#foreach ($server in $csv) {
+#Add-DhcpServerInDC -DnsName $server.Name -IPAddress $server.IP
+#}
 
 # Create an IPv4 DHCP scope
 Write-Host "Adding DHCP Scopes" -ForegroundColor "Red"
@@ -28,11 +31,18 @@ foreach ($scope in $csv) {
     Add-DhcpServerv4Scope -ComputerName $scope.Server -Name $scope.Name -StartRange $scope.Start -EndRange $scope.End -SubnetMask $scope.mask -Verbose
 }
 
-# Set the DNS server to use for all clients to use on the DHCP server
+# Set DHCP Server Options
+Write-Host "Setting DHCP Server Options" -ForegroundColor "Red"
+$csv = Import-CSV .\serveroptions.csv
+foreach ($scope in $csv) {
+  Set-DhcpServerv4OptionValue -ComputerName $scope.Server -DnsDomain $scope.DNSDomain -DNSServer $scope.DNSServer -Verbose
+}
+
+# Set DHCP Scope Options
 Write-Host "Setting DHCP Scope Options" -ForegroundColor "Red"
 $csv = Import-CSV .\scopeoptions.csv
 foreach ($scope in $csv) {
-  Set-DhcpServerv4OptionValue -ComputerName $scope.Server -ScopeId $scope.scopeID -DnsDomain $scope.DNSDomain -Verbose
+  Set-DhcpServerv4OptionValue -ComputerName $scope.Server -ScopeId $scope.scopeID -Router $scope.Router -Verbose
   Set-DhcpServerv4Scope -ComputerName $scope.Server -ScopeId $scope.scopeID -LeaseDuration $scope.Lease -Verbose
 }
 
@@ -61,11 +71,10 @@ Write-Host "Reserving DHCP IPs" -ForegroundColor "Red"
 $csv = Import-CSV .\scopereservations.csv
 foreach ($scope in $csv) {
   Add-DhcpServerv4Reservation -ComputerName $scope.Server -ScopeId $scope.ScopeID -IPAddress (Get-DhcpServerv4FreeIPAddress -ComputerName $scope.Server -ScopeId $scope.ScopeID) -ClientId $Scope.MAC -Name $scope.Name -Verbose
-
-  #Replicate Settings
-  Write-Host "Forcing Replication" -ForegroundColor "Red"
-  Get-DhcpServerv4Failover -ComputerName $scope.Server|Invoke-DhcpServerv4FailoverReplication -ComputerName $scope.Server -Force -Verbose
 }
 
+#Replicate Settings
+Write-Host "Forcing Replication" -ForegroundColor "Red"
+Get-DhcpServerv4Failover -ComputerName $scope.Server|Invoke-DhcpServerv4FailoverReplication -ComputerName $scope.Server -Force
 #Convert Leases to Reservation
 #Get-DhcpServerv4Lease -ComputerName $server1 -ScopeID 10.10.10.0 | Add-DhcpServerv4Reservation -ComputerName $server1
